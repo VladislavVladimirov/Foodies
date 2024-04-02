@@ -1,0 +1,16 @@
+<resources>
+    <string name="title">Manage cards</string>
+    <string name="logo_description">Logo</string>
+    <string name="show">Show</string>
+    <string name="delete">Delete</string>
+    <string name="app_name">Foodies</string>
+    <string name="settings">Settings</string>
+    <string name="search">Search</string>
+    <string name="card_photo">Meal photo</string>
+    <string name="spicy">Spicy</string>
+    <string name="discount">Discount</string>
+    <string name="vegan">Vegan</string>
+    <string name="plus">Plus</string>
+    <string name="minus">Minus</string>
+    <string name="cart">Cart</string>
+</resources>
