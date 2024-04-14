@@ -11,7 +11,7 @@ class SampleProductProvider : PreviewParameterProvider<Product> {
             category_id = 676168,
             name = "Авокадо Кранч Маки 8шт",
             description = "Ролл с нежным мясом камчатского краба, копченой курицей и авокадо.Украшается соусом\"Унаги\" и легким майонезом  Комплектуется бесплатным набором для роллов (Соевый соус Лайт 35г., васаби 6г., имбирь 15г.). +1 набор за каждые 600 рублей в заказе",
-            image = R.drawable.card_photo_example.toString(),
+            image = R.drawable.card_photo_example_170.toString(),
             price_current = 47000,
             price_old = 50000,
             measure_unit = "г",

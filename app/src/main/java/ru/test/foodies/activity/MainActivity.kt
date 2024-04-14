@@ -14,7 +14,9 @@ import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import ru.test.foodies.model.ViewModel
-import ru.test.foodies.screens.CatalogScreen
+import ru.test.foodies.screens.catalog.CatalogScreen
+import ru.test.foodies.screens.product.ProductScreen
+import ru.test.foodies.screens.search.SearchScreen
 import ru.test.foodies.ui.theme.AndroidDevTaskTheme
 
 @AndroidEntryPoint
@@ -28,11 +30,21 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+
                     val navController = rememberNavController()
                     NavHost(navController = navController, startDestination = "Catalog") {
                         composable("Catalog") {
                             val viewModel = hiltViewModel<ViewModel>()
-                            CatalogScreen(viewModel)
+                            CatalogScreen(viewModel, navController)
+                        }
+                        composable("productScreen/{productId}"){backStackEntry ->
+                            val viewModel = hiltViewModel<ViewModel>()
+                            val productId = backStackEntry.arguments?.getString("productId")
+                            ProductScreen(productId,  viewModel, navController)
+                        }
+                        composable("Search screen"){
+                            val viewModel = hiltViewModel<ViewModel>()
+                            SearchScreen(viewModel = viewModel, navController = navController)
                         }
                     }
                 }

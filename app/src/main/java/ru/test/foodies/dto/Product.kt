@@ -10,7 +10,7 @@ data class Product(
     val image: String? = null,
     val measure: Int? = null,
     val measure_unit: String? = null,
-    val name: String? = null,
+    val name: String = "",
     val price_current: Int? = null,
     val price_old: Int? = null,
     val proteins_per_100_grams: Double? = null,

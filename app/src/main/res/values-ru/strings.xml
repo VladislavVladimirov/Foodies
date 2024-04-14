@@ -14,4 +14,5 @@
     <string name="plus">Плюс</string>
     <string name="minus">Минус</string>
     <string name="cart">Корзина</string>
+    <string name="back">Назад</string>
 </resources>

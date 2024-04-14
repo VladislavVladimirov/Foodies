@@ -1,4 +1,4 @@
-package ru.test.foodies.screens.elements
+package ru.test.foodies.screens.catalog
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
@@ -11,18 +11,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavHostController
 import ru.test.androiddevtask.R
-import ru.test.foodies.screens.margin1
-import ru.test.foodies.screens.margin2
 import ru.test.foodies.ui.theme.Orange
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar() {
+fun TopBar(navController: NavHostController) {
     CenterAlignedTopAppBar(title = {
         ConstraintLayout(Modifier.fillMaxWidth()) {
             val (logo, search, settings) = createRefs()
@@ -53,7 +51,7 @@ fun TopBar() {
                     tint = Color.Black,
                 )
             }
-            IconButton(onClick = { /*TODO*/ }, modifier = Modifier.constrainAs(search) {
+            IconButton(onClick = { navController.navigate("Search screen")}, modifier = Modifier.constrainAs(search) {
                 end.linkTo(parent.end, margin2)
                 bottom.linkTo(parent.bottom)
             }) {

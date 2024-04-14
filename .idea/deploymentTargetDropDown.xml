@@ -5,6 +5,12 @@
       <entry key="MainActivity">
         <State />
       </entry>
+      <entry key="ProductCardItem">
+        <State />
+      </entry>
+      <entry key="SearchTopBar">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>

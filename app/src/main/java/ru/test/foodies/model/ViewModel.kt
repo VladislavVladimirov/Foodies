@@ -19,14 +19,12 @@ class ViewModel @Inject constructor(
     private val _data = MutableLiveData<Model>()
     val data: LiveData<Model>
         get() = _data
-    private val _cart = MutableLiveData<List<Product>>()
-    val cart: LiveData<List<Product>> get() = _cart
+
 
     init {
         loadCategories()
         loadProducts()
         loadTags()
-        _cart.value = listOf()
     }
 
     private fun loadCategories() = viewModelScope.launch {
@@ -58,32 +56,30 @@ class ViewModel @Inject constructor(
             _data.value = Model(error = true)
         }
     }
+
     fun addToCart(product: Product) {
-        val updatedCart = _cart.value.orEmpty().toMutableList()
-        val existingProduct = updatedCart.find { it.id == product.id }
+        val updatedProducts = _data.value?.products.orEmpty().toMutableList()
+        val existingProduct = updatedProducts.find { it.id == product.id }
         if (existingProduct != null) {
             val updatedProduct = existingProduct.copy(count = existingProduct.count + 1)
-            updatedCart[updatedCart.indexOf(existingProduct)] = updatedProduct
-        } else {
-            updatedCart.add(product.copy(count = 1))
+            updatedProducts[updatedProducts.indexOf(existingProduct)] = updatedProduct
         }
-        _cart.value = updatedCart
+        _data.value = Model(products = updatedProducts)
     }
+
     fun updateProductCount(productId: Int, change: Int) {
-        val updatedCart = _cart.value.orEmpty().toMutableList()
-        val existingProduct = updatedCart.find { it.id == productId }
+        val updatedProducts = _data.value?.products.orEmpty().toMutableList()
+        val existingProduct = updatedProducts.find { it.id == productId }
         if (existingProduct != null) {
             val updatedCount = existingProduct.count + change
-
-            if (updatedCount > 0) {
+            if (updatedCount >= 0) {
                 val updatedProduct = existingProduct.copy(count = updatedCount)
-                updatedCart[updatedCart.indexOf(existingProduct)] = updatedProduct
-            } else {
-                updatedCart.remove(existingProduct)
+                updatedProducts[updatedProducts.indexOf(existingProduct)] = updatedProduct
             }
-            _cart.value = updatedCart
         }
+        _data.value = Model(products = updatedProducts)
     }
 }
+
 
 

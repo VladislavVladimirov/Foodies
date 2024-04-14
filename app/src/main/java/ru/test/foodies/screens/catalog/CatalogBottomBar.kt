@@ -1,4 +1,4 @@
-package ru.test.foodies.screens.elements
+package ru.test.foodies.screens.catalog
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -22,8 +22,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import ru.test.androiddevtask.R
+import ru.test.foodies.model.Model
 import ru.test.foodies.model.ViewModel
-import ru.test.foodies.screens.textSizeButton
 import ru.test.foodies.ui.theme.Orange
 
 
@@ -31,7 +31,9 @@ import ru.test.foodies.ui.theme.Orange
 @Composable
 fun BottomBar() {
     val viewModel: ViewModel = viewModel()
-    val cart by viewModel.cart.observeAsState(listOf())
+    val model: Model by viewModel.data.observeAsState(Model())
+    val products = model.products
+    val cart = products.filter { it.count > 0 }
     var sum = 0
     for (product in cart) {
         if (product.price_current != null) {
