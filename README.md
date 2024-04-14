@@ -4,11 +4,10 @@
 
 Данный проект представляет собой небольшое приложение доставки блюд. Проект выполнен в рамках прохождения тестового задания от компании  Request Design
 
-Ccылка на задание: 
-https://docs.google.com/document/d/1_GwEDzsLOt1jEllWbIvKGRz88OHj5SnTmXF-CCwwS2w/edit
+[Тестовое задание](https://docs.google.com/document/d/1_GwEDzsLOt1jEllWbIvKGRz88OHj5SnTmXF-CCwwS2w/edit)
 
-Ссылка на дизайн-макет в Figma:
-https://www.figma.com/file/AgOZovMHsetEejeuF33vkw/Foodies?type=design&mode=design&t=9mYRe9OgoAEEEit2-0
+[Дизайн-макет в Figma](https://www.figma.com/file/AgOZovMHsetEejeuF33vkw/Foodies?type=design&mode=design&t=9mYRe9OgoAEEEit2-0) 
+
 
 Используется следующий стек технологий:
 - Архитектура MVVM
