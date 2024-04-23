@@ -13,6 +13,8 @@
 - Архитектура MVVM
 - Architecture Components (ViewModel, LiveData)
 - Jetpack Compose
+- Clean Arrchitectire
+- Coroutines
 - Navigation with Jetpack Compose
 - Okhttp
 - Hilt (Dagger)
