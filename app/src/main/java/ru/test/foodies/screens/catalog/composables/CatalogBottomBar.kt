@@ -1,4 +1,4 @@
-package ru.test.foodies.screens.product
+package ru.test.foodies.screens.catalog.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -14,10 +14,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -26,26 +22,24 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import ru.test.androiddevtask.R
-import ru.test.foodies.dto.Product
 import ru.test.foodies.model.Model
 import ru.test.foodies.model.ViewModel
 import ru.test.foodies.screens.catalog.textSizeButton
 import ru.test.foodies.ui.theme.Orange
 
+
 @OptIn(ExperimentalCoroutinesApi::class)
 @Composable
-fun BottomBarProductCard(product: Product) {
+fun BottomBar() {
     val viewModel: ViewModel = viewModel()
-    val price = product.price_current?.div(100)
     val model: Model by viewModel.data.observeAsState(Model())
     val products = model.products
-    val count by remember { mutableIntStateOf(product.count) }
-    var countVisible by remember { mutableStateOf(true) }
-    if (count > 0) {
-        countVisible = true
-    }
-    if (products.find { it.id == product?.id }?.count == 0) {
-        countVisible = false
+    val cart = products.filter { it.count > 0 }
+    var sum = 0
+    for (product in cart) {
+        if (product.price_current != null) {
+            sum += product.price_current * product.count
+        }
     }
     Box(
         modifier = Modifier
@@ -55,43 +49,12 @@ fun BottomBarProductCard(product: Product) {
     )
     {
         IconButton(
-            onClick = {
-                viewModel.addToCart(product)
-            },
+            onClick = { /*TODO*/ },
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp)
                 .background(Orange, RoundedCornerShape(8.dp))
         ) {
-            if (countVisible) {
-                Row {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_cart),
-                        contentDescription = stringResource(id = R.string.cart),
-                        tint = Color.White,
-                    )
-                    Text(
-                        text = "В корзине $count шт.",
-                        fontSize = textSizeButton,
-                        color = Color.White,
-                        modifier = Modifier.padding(start = 8.dp)
-                    )
-                }
-            } else {
-                Row {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_cart),
-                        contentDescription = stringResource(id = R.string.cart),
-                        tint = Color.White,
-                    )
-                    Text(
-                        text = "В корзину за $price ₽",
-                        fontSize = textSizeButton,
-                        color = Color.White,
-                        modifier = Modifier.padding(start = 8.dp)
-                    )
-                }
-            }
             Row {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_cart),
@@ -99,7 +62,7 @@ fun BottomBarProductCard(product: Product) {
                     tint = Color.White,
                 )
                 Text(
-                    text = "В корзину за $price ₽",
+                    text = "${sum / 100} ₽",
                     fontSize = textSizeButton,
                     color = Color.White,
                     modifier = Modifier.padding(start = 8.dp)

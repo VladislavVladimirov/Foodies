@@ -11,6 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -31,8 +32,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import ru.test.androiddevtask.R
 import ru.test.foodies.model.Model
 import ru.test.foodies.model.ViewModel
-import ru.test.foodies.screens.catalog.BottomBar
-import ru.test.foodies.screens.catalog.ProductCatalog
+import ru.test.foodies.screens.catalog.composables.BottomBar
+import ru.test.foodies.screens.catalog.composables.ProductCatalog
 import ru.test.foodies.screens.catalog.textSizeButton
 import ru.test.foodies.ui.theme.GrayText
 import ru.test.foodies.ui.theme.Orange
@@ -66,6 +67,7 @@ fun SearchScreen(viewModel: ViewModel, navController: NavHostController) {
                     )
                 }
                 TextField(
+                    colors = TextFieldDefaults.colors(cursorColor = Orange, unfocusedContainerColor = Color.White, focusedContainerColor = Color.White, unfocusedIndicatorColor = Color.White, focusedIndicatorColor = Color.White),
                     textStyle = TextStyle(color = Color.Black, fontSize = 16.sp),
                     value = input, onValueChange = {
                         input = it

@@ -1,4 +1,4 @@
-package ru.test.foodies.screens.catalog
+package ru.test.foodies.screens.catalog.composables
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
@@ -15,6 +15,8 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import ru.test.androiddevtask.R
+import ru.test.foodies.screens.catalog.margin1
+import ru.test.foodies.screens.catalog.margin2
 import ru.test.foodies.ui.theme.Orange
 
 

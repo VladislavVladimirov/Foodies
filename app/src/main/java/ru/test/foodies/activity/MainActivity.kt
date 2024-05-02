@@ -37,12 +37,12 @@ class MainActivity : ComponentActivity() {
                             val viewModel = hiltViewModel<ViewModel>()
                             CatalogScreen(viewModel, navController)
                         }
-                        composable("productScreen/{productId}"){backStackEntry ->
+                        composable("productScreen/{productId}") { backStackEntry ->
                             val viewModel = hiltViewModel<ViewModel>()
                             val productId = backStackEntry.arguments?.getString("productId")
-                            ProductScreen(productId,  viewModel, navController)
+                            ProductScreen(productId, viewModel, navController)
                         }
-                        composable("Search screen"){
+                        composable("Search screen") {
                             val viewModel = hiltViewModel<ViewModel>()
                             SearchScreen(viewModel = viewModel, navController = navController)
                         }

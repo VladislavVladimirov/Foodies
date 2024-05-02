@@ -1,3 +1,5 @@
+@file:Suppress("KotlinConstantConditions")
+
 package ru.test.foodies.screens.product
 
 import androidx.compose.foundation.Image
@@ -31,6 +33,9 @@ import ru.test.foodies.model.Model
 import ru.test.foodies.model.ViewModel
 import ru.test.foodies.screens.catalog.margin1
 import ru.test.foodies.screens.catalog.textSizeButton
+import ru.test.foodies.screens.product.composables.BottomBarProductCard
+import ru.test.foodies.screens.product.composables.ProductCardItem
+import ru.test.foodies.screens.product.composables.ProductCardItemBottom
 import ru.test.foodies.ui.theme.GrayText
 
 
@@ -129,27 +134,38 @@ fun ProductScreen(productId: String?, viewModel: ViewModel, navController: NavHo
                         fontSize = textSizeButton,
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
                     )
+
                     Column {
-                        ProductCardItem(
-                            string1 = "Вес",
-                            string2 = "${product.measure.toString()} ${product.measure_unit.toString()}"
-                        )
-                        ProductCardItem(
-                            string1 = "Энерг. ценность",
-                            string2 = product.energy_per_100_grams.toString() + " ккал"
-                        )
-                        ProductCardItem(
-                            string1 = "Белки",
-                            string2 = product.proteins_per_100_grams.toString() + " г"
-                        )
-                        ProductCardItem(
-                            string1 = "Жиры",
-                            string2 = product.fats_per_100_grams.toString() + " г"
-                        )
-                        ProductCardItemBottom(
-                            string1 = "Углеводы",
-                            string2 = product.carbohydrates_per_100_grams.toString() + " г"
-                        )
+                        if (product.measure != 0 && product.measure != 1) {
+                            ProductCardItem(
+                                string1 = "Вес",
+                                string2 = "${product.measure.toString()} ${product.measure_unit.toString()}"
+                            )
+                        }
+                        if (product.energy_per_100_grams != 0.0 && product.energy_per_100_grams != 1.0) {
+                            ProductCardItem(
+                                string1 = "Энерг. ценность",
+                                string2 = product.energy_per_100_grams.toString() + " ккал"
+                            )
+                        }
+                        if (product.proteins_per_100_grams != 0.0 && product.proteins_per_100_grams != 1.0) {
+                            ProductCardItem(
+                                string1 = "Белки",
+                                string2 = product.proteins_per_100_grams.toString() + " г"
+                            )
+                        }
+                        if (product.fats_per_100_grams != 0.0 && product.fats_per_100_grams != 1.0) {
+                            ProductCardItem(
+                                string1 = "Жиры",
+                                string2 = product.fats_per_100_grams.toString() + " г"
+                            )
+                        }
+                        if (product.carbohydrates_per_100_grams != 0.0 && product.carbohydrates_per_100_grams != 1.0) {
+                            ProductCardItemBottom(
+                                string1 = "Углеводы",
+                                string2 = product.carbohydrates_per_100_grams.toString() + " г"
+                            )
+                        }
 
                     }
                 }

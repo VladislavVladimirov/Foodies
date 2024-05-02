@@ -1,4 +1,4 @@
-package ru.test.foodies.screens.catalog
+package ru.test.foodies.screens.catalog.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

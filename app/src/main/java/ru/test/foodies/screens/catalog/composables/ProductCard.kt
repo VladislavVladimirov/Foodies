@@ -1,4 +1,6 @@
-package ru.test.foodies.screens.catalog
+@file:Suppress("KotlinConstantConditions")
+
+package ru.test.foodies.screens.catalog.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -6,6 +8,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -39,6 +42,10 @@ import ru.test.androiddevtask.R
 import ru.test.foodies.dto.Product
 import ru.test.foodies.model.Model
 import ru.test.foodies.model.ViewModel
+import ru.test.foodies.screens.catalog.margin1
+import ru.test.foodies.screens.catalog.margin2
+import ru.test.foodies.screens.catalog.textSizeButton
+import ru.test.foodies.screens.catalog.textSizeCard
 import ru.test.foodies.screens.sample.SampleProductProvider
 import ru.test.foodies.ui.theme.Gray
 import ru.test.foodies.ui.theme.GrayText
@@ -50,7 +57,6 @@ fun ProductCard(
     navController: NavHostController
 ) {
     val viewModel: ViewModel = viewModel()
-
     val productId = product.id
     val model: Model by viewModel.data.observeAsState(Model())
     val products = model.products
@@ -64,7 +70,7 @@ fun ProductCard(
     }
     Card(
         Modifier
-            .padding(4.dp),
+            .padding(4.dp).height(290.dp),
         RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = Gray,
@@ -140,25 +146,31 @@ fun ProductCard(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
+            if (product.measure != 0 && product.measure != 1) {
+                Text(
+                    text = "${product.measure.toString()} ${product.measure_unit.toString()}",
+                    modifier = Modifier
+                        .constrainAs(weight) {
+                            top.linkTo(name.bottom)
+                            start.linkTo(parent.start, margin1)
+                        }
+                        .clickable {
+                            navController.navigate("productScreen/$productId")
+                        },
+                    fontSize = textSizeCard,
+                    color = GrayText,
+                )
+            }
 
-            Text(
-                text = "${product.measure.toString()} ${product.measure_unit.toString()}",
-                modifier = Modifier
-                    .constrainAs(weight) {
-                        top.linkTo(name.bottom)
-                        start.linkTo(parent.start, margin1)
-                    }
-                    .clickable {
-                        navController.navigate("productScreen/$productId")
-                    },
-                fontSize = textSizeCard,
-                color = GrayText,
-            )
             Box(modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp)
                 .constrainAs(addToCart) {
-                    top.linkTo(weight.bottom, margin2)
+                    if (product.measure != 0 && product.measure != 1) {
+                        top.linkTo(weight.bottom, margin2)
+                    } else {
+                        top.linkTo(name.bottom, margin = 34.dp)
+                    }
                     bottom.linkTo(parent.bottom, margin1)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)

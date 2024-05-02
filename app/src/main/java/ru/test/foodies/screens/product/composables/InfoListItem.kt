@@ -1,4 +1,4 @@
-package ru.test.foodies.screens.product
+package ru.test.foodies.screens.product.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
