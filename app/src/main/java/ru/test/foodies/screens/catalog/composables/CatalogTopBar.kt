@@ -7,6 +7,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -22,12 +23,12 @@ import ru.test.foodies.ui.theme.Orange
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(navController: NavHostController) {
+fun TopBar(navController: NavHostController, isOpened: MutableState<Boolean>) {
     CenterAlignedTopAppBar(title = {
         ConstraintLayout(Modifier.fillMaxWidth()) {
             val (logo, search, settings) = createRefs()
             Icon(
-                painter = painterResource(id = R.drawable.ic_logo),
+                painter = painterResource(id = R.drawable.ic_logo_orange),
                 contentDescription = stringResource(
                     id = R.string.logo_description,
                 ),
@@ -41,7 +42,7 @@ fun TopBar(navController: NavHostController) {
                     }
                     .size(width = 271.dp, height = 44.dp)
             )
-            IconButton(onClick = { /*TODO*/ }, modifier = Modifier.constrainAs(settings) {
+            IconButton(onClick = { isOpened.value = true }, modifier = Modifier.constrainAs(settings) {
                 start.linkTo(parent.start, margin2)
                 bottom.linkTo(parent.bottom)
             }) {

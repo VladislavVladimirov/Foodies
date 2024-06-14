@@ -17,10 +17,12 @@ import ru.test.foodies.model.ViewModel
 import ru.test.foodies.screens.catalog.CatalogScreen
 import ru.test.foodies.screens.product.ProductScreen
 import ru.test.foodies.screens.search.SearchScreen
+import ru.test.foodies.screens.splash.SplashScreen
 import ru.test.foodies.ui.theme.AndroidDevTaskTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +34,10 @@ class MainActivity : ComponentActivity() {
                 ) {
 
                     val navController = rememberNavController()
-                    NavHost(navController = navController, startDestination = "Catalog") {
+                    NavHost(navController = navController, startDestination = "Splash") {
+                        composable("Splash") {
+                            SplashScreen(navController)
+                        }
                         composable("Catalog") {
                             val viewModel = hiltViewModel<ViewModel>()
                             CatalogScreen(viewModel, navController)

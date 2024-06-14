@@ -2,7 +2,6 @@ package ru.test.foodies.screens.catalog.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -30,8 +29,8 @@ fun CategoryTab() {
     val model: Model by viewModel.data.observeAsState(Model())
     var tabIndex by remember { mutableIntStateOf(0) }
     val tabs = model.categories.map { it.name }
-    Row(modifier = Modifier.fillMaxWidth()) {
-        TabRow(selectedTabIndex = tabIndex) {
+    Row {
+      TabRow(selectedTabIndex = tabIndex) {
             tabs.forEachIndexed { index, title ->
                 Tab(
                     text = { Text(text = title.toString(), color = Color.Black) },
