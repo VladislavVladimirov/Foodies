@@ -107,7 +107,7 @@ fun SearchScreen(viewModel: ViewModel, navController: NavHostController) {
             } else {
                 Box(Modifier.fillMaxSize()) {
                     Text(
-                        text = "Ничего не нашлось :(",
+                        text = stringResource(R.string.search_hint),
                         color = GrayText,
                         fontSize = textSizeButton,
                         modifier = Modifier.align(Alignment.Center),

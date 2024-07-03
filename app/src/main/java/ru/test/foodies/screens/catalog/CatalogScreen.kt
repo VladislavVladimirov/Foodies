@@ -1,34 +1,39 @@
 package ru.test.foodies.screens.catalog
 
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.toMutableStateList
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import ru.test.foodies.dto.Product
+import ru.test.androiddevtask.R
 import ru.test.foodies.model.Model
 import ru.test.foodies.model.ViewModel
 import ru.test.foodies.screens.catalog.composables.BottomBar
 import ru.test.foodies.screens.catalog.composables.BottomSheet
 import ru.test.foodies.screens.catalog.composables.ProductCatalog
 import ru.test.foodies.screens.catalog.composables.TopBar
-import ru.test.foodies.util.DataFormatter
+import ru.test.foodies.ui.theme.GrayText
 
 
 val margin1 = 16.dp
@@ -62,6 +67,7 @@ fun CatalogScreen(viewModel: ViewModel, navController: NavHostController) {
     val filteredProducts = remember {
         products.toMutableStateList()
     }
+    filteredProducts.addAll(products)
 
     systemUiController.setSystemBarsColor(
         color = Color.White
@@ -77,12 +83,24 @@ fun CatalogScreen(viewModel: ViewModel, navController: NavHostController) {
         }
     }) {
         // CategoryTab()
+        if (filteredProducts.isNotEmpty()) {
+            ProductCatalog(
+                list = filteredProducts,
+                navController = navController,
+                it
+            )
+        } else {
+            Box(Modifier.fillMaxSize()) {
+                Text(
+                    text = stringResource(R.string.filter_hint),
+                    color = GrayText,
+                    fontSize = textSizeButton,
+                    modifier = Modifier.align(Alignment.Center),
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
 
-        ProductCatalog(
-            list = filteredProducts,
-            navController = navController,
-            it
-        )
         BottomSheet(
             isOpened = isOpened,
             sheetState = sheetState,

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalBottomSheet
@@ -42,7 +43,7 @@ fun BottomSheet(
     products: List<Product>,
     scope: CoroutineScope,
 ) {
-    var filteredProductsState = remember { filteredProducts }
+    val filteredProductsState = remember { filteredProducts }
 
     if (isOpened.value) {
         ModalBottomSheet(sheetState = sheetState,
@@ -75,7 +76,12 @@ fun BottomSheet(
                     Checkbox(
                         checked = isVegan.value,
                         onCheckedChange = { isVegan.value = !isVegan.value },
-                        Modifier.align(alignment = Alignment.CenterEnd)
+                        Modifier.align(alignment = Alignment.CenterEnd),
+                        colors = CheckboxDefaults.colors(
+                            checkedColor = Orange,
+                            uncheckedColor = Color.Gray,
+                            checkmarkColor = Color.White
+                        )
                     )
                 }
                 Box(
@@ -97,7 +103,12 @@ fun BottomSheet(
                             isSpicy.value = !isSpicy.value
 
                         },
-                        Modifier.align(alignment = Alignment.CenterEnd)
+                        Modifier.align(alignment = Alignment.CenterEnd),
+                        colors = CheckboxDefaults.colors(
+                            checkedColor = Orange,
+                            uncheckedColor = Color.Gray,
+                            checkmarkColor = Color.White
+                        )
                     )
                 }
                 Box(
@@ -116,7 +127,12 @@ fun BottomSheet(
                     Checkbox(
                         checked = isDiscount.value,
                         onCheckedChange = { isDiscount.value = !isDiscount.value },
-                        Modifier.align(alignment = Alignment.CenterEnd)
+                        Modifier.align(alignment = Alignment.CenterEnd),
+                        colors = CheckboxDefaults.colors(
+                            checkedColor = Orange,
+                            uncheckedColor = Color.Gray,
+                            checkmarkColor = Color.White
+                        )
                     )
                 }
                 IconButton(
@@ -126,7 +142,14 @@ fun BottomSheet(
                                 isOpened.value = false
                             }
                             filteredProductsState.clear()
-                            filteredProductsState.addAll(DataFormatter.filterProducts(products, isVegan, isSpicy, isDiscount))
+                            filteredProductsState.addAll(
+                                DataFormatter.filterProducts(
+                                    products,
+                                    isVegan,
+                                    isSpicy,
+                                    isDiscount
+                                )
+                            )
                         }
                     },
                     modifier = Modifier

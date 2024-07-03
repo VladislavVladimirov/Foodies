@@ -15,4 +15,6 @@
     <string name="minus">Минус</string>
     <string name="cart">Корзина</string>
     <string name="back">Назад</string>
+    <string name="filter_hint">Таких блюд нет :(\nПопробуйте изменить фильтры</string>
+    <string name="search_hint">Ничего не нашлось :(</string>
 </resources>

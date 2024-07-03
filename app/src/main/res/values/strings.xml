@@ -14,4 +14,6 @@
     <string name="minus">Minus</string>
     <string name="cart">Cart</string>
     <string name="back">Back</string>
+    <string name="filter_hint">No such meals :( Try to change filters</string>
+    <string name="search_hint">Nothing found :(</string>
 </resources>
