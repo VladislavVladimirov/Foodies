@@ -29,7 +29,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import ru.test.androiddevtask.R
-import ru.test.foodies.model.Model
+import ru.test.foodies.model.ProductsModel
 import ru.test.foodies.model.ViewModel
 import ru.test.foodies.screens.catalog.margin1
 import ru.test.foodies.screens.catalog.textSizeButton
@@ -42,8 +42,8 @@ import ru.test.foodies.ui.theme.GrayText
 @OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 fun ProductScreen(productId: String?, viewModel: ViewModel, navController: NavHostController) {
-    val model: Model by viewModel.data.observeAsState(Model())
-    val product = model.products.find { it.id == productId?.toInt() }
+    val productsModel: ProductsModel by viewModel.products.observeAsState(ProductsModel())
+    val product = productsModel.products.find { it.id == productId?.toInt() }
     val scrollState = rememberScrollState()
     if (product != null) {
         Scaffold(Modifier.fillMaxSize(), bottomBar = {

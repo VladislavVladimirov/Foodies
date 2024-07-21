@@ -49,5 +49,11 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create()
+    fun provideProductsApiService(retrofit: Retrofit): ProductsApiService = retrofit.create()
+    @Provides
+    @Singleton
+    fun provideTagsApiService(retrofit: Retrofit): TagsApiService = retrofit.create()
+    @Provides
+    @Singleton
+    fun provideCategoriesApiService(retrofit: Retrofit): CategoriesApiService = retrofit.create()
 }

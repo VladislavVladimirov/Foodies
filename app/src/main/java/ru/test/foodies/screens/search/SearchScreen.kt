@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -30,7 +31,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import ru.test.androiddevtask.R
-import ru.test.foodies.model.Model
+import ru.test.foodies.model.ProductsModel
 import ru.test.foodies.model.ViewModel
 import ru.test.foodies.screens.catalog.composables.BottomBar
 import ru.test.foodies.screens.catalog.composables.ProductCatalog
@@ -41,8 +42,8 @@ import ru.test.foodies.ui.theme.Orange
 @OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 fun SearchScreen(viewModel: ViewModel, navController: NavHostController) {
-    val model: Model by viewModel.data.observeAsState(Model())
-    val products = model.products
+    val productsModel: ProductsModel by viewModel.products.observeAsState(ProductsModel())
+    val products = productsModel.products
     val cart = products.filter { it.count > 0 }
     val cartEmpty = cart.isEmpty()
     var input by remember { mutableStateOf("") }
@@ -67,7 +68,13 @@ fun SearchScreen(viewModel: ViewModel, navController: NavHostController) {
                     )
                 }
                 TextField(
-                    colors = TextFieldDefaults.colors(cursorColor = Orange, unfocusedContainerColor = Color.White, focusedContainerColor = Color.White, unfocusedIndicatorColor = Color.White, focusedIndicatorColor = Color.White),
+                    colors = TextFieldDefaults.colors(
+                        cursorColor = Orange,
+                        unfocusedContainerColor = Color.White,
+                        focusedContainerColor = Color.White,
+                        unfocusedIndicatorColor = Color.White,
+                        focusedIndicatorColor = Color.White
+                    ),
                     textStyle = TextStyle(color = Color.Black, fontSize = 16.sp),
                     value = input, onValueChange = {
                         input = it
@@ -99,15 +106,27 @@ fun SearchScreen(viewModel: ViewModel, navController: NavHostController) {
     }, bottomBar = {
         if (!cartEmpty) {
             BottomBar()
-        }}) {
-
-        if (input != "") {
-            if (list.isNotEmpty()) {
-                ProductCatalog(list = list, navController = navController, paddingValues = it)
+        }
+    }) {
+        Box(modifier = Modifier.padding(it)) {
+            if (input != "") {
+                if (list.isNotEmpty()) {
+                    ProductCatalog(list = list, navController = navController)
+                } else {
+                    Box(Modifier.fillMaxSize()) {
+                        Text(
+                            text = stringResource(R.string.search_hint),
+                            color = GrayText,
+                            fontSize = textSizeButton,
+                            modifier = Modifier.align(Alignment.Center),
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
             } else {
                 Box(Modifier.fillMaxSize()) {
                     Text(
-                        text = stringResource(R.string.search_hint),
+                        text = "Введите название блюда,\nкоторое ищете",
                         color = GrayText,
                         fontSize = textSizeButton,
                         modifier = Modifier.align(Alignment.Center),
@@ -116,18 +135,7 @@ fun SearchScreen(viewModel: ViewModel, navController: NavHostController) {
                 }
             }
 
-        } else {
-            Box(Modifier.fillMaxSize()) {
-                Text(
-                    text = "Введите название блюда,\nкоторое ищете",
-                    color = GrayText,
-                    fontSize = textSizeButton,
-                    modifier = Modifier.align(Alignment.Center),
-                    textAlign = TextAlign.Center
-                )
-            }
         }
 
     }
-
 }

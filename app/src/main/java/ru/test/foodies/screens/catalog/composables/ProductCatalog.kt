@@ -2,7 +2,6 @@ package ru.test.foodies.screens.catalog.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -19,10 +18,9 @@ import ru.test.foodies.dto.Product
 fun ProductCatalog(
     list: List<Product>,
     navController: NavHostController,
-    paddingValues: PaddingValues
 ) {
     val listState = rememberLazyGridState()
-    Box(Modifier.padding(paddingValues)) {
+    Box {
         LazyVerticalGrid(
             state = listState,
             columns = GridCells.Fixed(2),

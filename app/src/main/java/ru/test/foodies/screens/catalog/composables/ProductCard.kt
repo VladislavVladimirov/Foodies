@@ -40,7 +40,7 @@ import androidx.navigation.NavHostController
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import ru.test.androiddevtask.R
 import ru.test.foodies.dto.Product
-import ru.test.foodies.model.Model
+import ru.test.foodies.model.ProductsModel
 import ru.test.foodies.model.ViewModel
 import ru.test.foodies.screens.catalog.margin1
 import ru.test.foodies.screens.catalog.margin2
@@ -58,8 +58,8 @@ fun ProductCard(
 ) {
     val viewModel: ViewModel = viewModel()
     val productId = product.id
-    val model: Model by viewModel.data.observeAsState(Model())
-    val products = model.products
+    val productsModel: ProductsModel by viewModel.products.observeAsState(ProductsModel())
+    val products = productsModel.products
     val count by remember { mutableIntStateOf(product.count) }
     var priceVisible by remember { mutableStateOf(true) }
     if (count > 0) {

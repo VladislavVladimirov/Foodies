@@ -27,7 +27,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import ru.test.androiddevtask.R
 import ru.test.foodies.dto.Product
-import ru.test.foodies.model.Model
+import ru.test.foodies.model.ProductsModel
 import ru.test.foodies.model.ViewModel
 import ru.test.foodies.screens.catalog.textSizeButton
 import ru.test.foodies.ui.theme.Orange
@@ -37,8 +37,8 @@ import ru.test.foodies.ui.theme.Orange
 fun BottomBarProductCard(product: Product) {
     val viewModel: ViewModel = viewModel()
     val price = product.price_current?.div(100)
-    val model: Model by viewModel.data.observeAsState(Model())
-    val products = model.products
+    val productsModel: ProductsModel by viewModel.products.observeAsState(ProductsModel())
+    val products = productsModel.products
     val count by remember { mutableIntStateOf(product.count) }
     var countVisible by remember { mutableStateOf(true) }
     if (count > 0) {
