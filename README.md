@@ -13,7 +13,7 @@
 - Архитектура MVVM
 - Architecture Components (ViewModel, LiveData)
 - Jetpack Compose
-- Clean Arrchitectire
+- Clean Architectire
 - Coroutines
 - Navigation with Jetpack Compose
 - Okhttp
